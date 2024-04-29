@@ -3,7 +3,7 @@ const { Server } = require("socket.io");
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
-  cors: "http://localhost:5174/",
+  cors: "http://localhost:5173/",
 });
 
 const allUsers = {};
@@ -30,6 +30,8 @@ io.on("connection", (socket) => {
     }
 
     if (opponentPlayer) {
+      currentUser.online = false;
+      opponentPlayer.online = false;
       allRooms.push({
         player1: opponentPlayer,
         player2: currentUser,
